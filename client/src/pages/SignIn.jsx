@@ -2,18 +2,20 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const SignIn = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [formData, setFormData] = useState({})
+  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   const handleSignIn = (e) => {
     e.preventDefault()
+    console.log(formData)
+  }
 
-    if(!email || !password) {
-      alert('All fields are required')
-      return
-    }
-
-    console.log(email, password)
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    })
   }
 
   return (
@@ -26,17 +28,15 @@ const SignIn = () => {
           id="email"
           type="email"
           placeholder="Email here..."
-          value={email}
           className="w-full focus:outline-slate-400 text-slate-600 bg-white py-2 px-2 rounded-md font-medium"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleChange}
         />
         <input
           id="password"
           type="password"
           placeholder="Password here..."
-          value={password}
           className="w-full focus:outline-slate-400 text-slate-600 bg-white py-2 px-2 rounded-md font-medium"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={handleChange}
         />
 
         <button className="w-full uppercase py-2 px-2 bg-blue-950 rounded-md text-slate-100 font-medium hover:opacity-80">
