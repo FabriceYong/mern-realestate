@@ -1,15 +1,16 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import 'dotenv/config'
+import 'dotenv/config.js'
+import bodyParser from 'body-parser'
 
-import userRouter from './api_routers/userRouter.js'
 import authRouter from './api_routers/auth_route.js'
 
-
 const app = express()
+const PORT = process.env.PORT || 5000
 
 // middlewares 
 app.use(express.json())
+app.use(bodyParser.json())
 app.use(express.urlencoded({extended: true}))
 // error middleware
 app.use((err, req, res, next) => {
@@ -24,14 +25,13 @@ app.use((err, req, res, next) => {
 })
 
 // database connection string
-mongoose.connect('mongodb+srv://fabricenjua:njua1234@real-estate-app.8eain6e.mongodb.net/mern-estate?retryWrites=true&w=majority').then(() => {
+mongoose.connect(process.env.DB_URL).then(() => {
     console.log('connected to database')
 }).catch((err) => {
     console.log(err, err.message)
 })
 
 // api routes
-app.use('/api/user', userRouter)
 app.use('/api/auth', authRouter)
 
-app.listen(5000, () => console.log('Server is running on port 5000!'))
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}!`))

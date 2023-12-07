@@ -19,7 +19,7 @@ const Navbar = () => {
         </form>
         <ul className='flex gap-4'>
           <Link to={'/'}>
-            <li className='hover:underline hidden sm:inline text-slate-700 font-medium sm:hidden'>Home</li>
+            <li className='hover:underline hidden text-slate-700 font-medium sm:hidden'>Home</li>
           </Link>
           <Link to={'signin'}>
             <li className='hover:underline hidden sm:inline text-slate-700 font-medium'>Sign In</li>
